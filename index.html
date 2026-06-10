@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="loading">
+        Loading...
+        <div class="loader"></div>
+    </div>
+    <div class="toolbar">
+        <div class="title">
+            main.py
+        </div>
+        <button class="secondary btn" onclick="addText('\t')">
+            Tab
+            <i class="bi bi-chevron-bar-right"></i>
+        </button>
+
+        <button class="btn" onclick="runCode()">
+            Run
+            <i class="bi bi-play-fill"></i>
+        </button>
+    </div>
+
+    <div class="workspace">
+        <div id="editor"></div>
+
+        <div class="console">
+            <div class="console-header">
+                OUTPUT
+
+                <button class="secondary btn" onclick="copyCode()">
+                    Copy
+                    <i class="bi bi-clipboard-fill"></i>
+                </button>
+            </div>
+
+            <pre id="output"></pre>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.28.3/full/pyodide.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@latest/min/vs/loader.js"></script>
+    <script src="./script.js"></script>
+</body>
+
+</html>
