@@ -29,7 +29,8 @@ body {
 /* Top Bar */
 
 .toolbar {
-    height: 52px;
+    min-height: 52px;
+    height: 2.5rem;
     background: var(--panel);
     border-bottom: 1px solid var(--border);
 

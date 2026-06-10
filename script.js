@@ -1,3 +1,6 @@
+document.documentElement.style.fontSize = localStorage.getItem("f-size") || "16px";
+document.getElementById("f-size").value = localStorage.getItem("f-size") || "16px";
+
 require.config({
     paths: {
         vs: "https://cdn.jsdelivr.net/npm/monaco-editor@latest/min/vs"
@@ -8,9 +11,10 @@ require(["vs/editor/editor.main"], function () {
     window.editor = monaco.editor.create(
         document.getElementById("editor"),
         {
-            value: ``,
+            value: `print('Hello World!')`,
             language: "python",
             theme: "vs-dark",
+            fontSize: localStorage.getItem("f-size") || "16px",
             automaticLayout: true,
             minimap: {
                 enabled: false
@@ -104,6 +108,7 @@ function pgLoad() {
 document.getElementById("f-size").addEventListener("change", (event) => {
     document.documentElement.style.fontSize = event.target.value;
     editor.updateOptions({ fontSize: event.target.value });
+    localStorage.setItem("f-size", event.target.value);
 })
 
 initPython();
