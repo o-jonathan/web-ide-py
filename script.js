@@ -88,4 +88,9 @@ function pgLoad() {
     loadscreen.classList.add('fade')
 }
 
+document.getElementById("f-size").addEventListener("change", (event) => {
+    document.documentElement.style.fontSize = event.target.value;
+    editor.updateOptions({ fontSize: event.target.value });
+})
+
 initPython();

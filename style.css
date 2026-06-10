@@ -8,6 +8,7 @@
     --accent: #0078d4;
     --accent-hover: #1f8fff;
     --error: #f14c4c;
+    font-size: 16px;
 }
 
 * {
@@ -20,10 +21,7 @@ body {
     height: 100vh;
     background: var(--bg);
     color: var(--text);
-    font-family:
-        Inter,
-        system-ui,
-        sans-serif;
+    font-family: Inter, system-ui, sans-serif;
     display: flex;
     flex-direction: column;
 }
@@ -37,9 +35,27 @@ body {
 
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 10px;
 
     padding: 0 16px;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.select-container {
+    display: flex;
+    align-items: center;
+    background-color: #1a1a1a;
+    padding-right: 0;
+    padding-left: 10px;
+    border-radius: 8px;
+    gap: 5px;
 }
 
 /* Buttons */
@@ -63,6 +79,7 @@ body {
 
     cursor: pointer;
     transition: .2s;
+    font-size: 1rem;
 }
 
 .btn:hover {
@@ -73,6 +90,77 @@ body {
 .btn:active {
     transform: translateY(0);
 }
+
+select, ::picker(select) {
+    appearance: base-select;
+    border: none;
+    border-radius: 8px ;
+}
+
+select::picker-icon {
+    transition: all 0.2s;
+}
+
+select:open::picker-icon {
+    rotate: 180deg;
+}
+
+.select {
+    --accent: #1a1a1a;
+    --accent-hover: #1f1f1f;
+
+    border: none;
+    background: var(--accent);
+    color: white;
+
+    padding-block: 10px;
+    padding-right: 16px;
+    padding-left: 8px;
+    border-radius: 0 8px 8px 0;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    cursor: pointer;
+    transition: .2s;
+    font-size: 1rem;
+}
+
+.select:hover {
+    background-color: #1f1f1f;
+}
+
+option {
+    background-color: #1a1a1a;
+    color: white;
+    border: 2px solid #2f2f2f;
+    border-bottom: none;
+    border-top: none;
+}
+
+option:checked {
+    background-color: #2f2f2f;
+}
+
+option:not(:checked) {
+    color: var(--muted)
+}
+
+option:first-child {
+    border: 2px solid #2f2f2f;
+    border-bottom: none;
+}
+
+option:last-child {
+    border: 2px solid #2f2f2f;
+    border-top: none;
+}
+
+option:hover {
+    background-color: #1f1f1f;
+}
+
 
 /* Main Layout */
 
@@ -111,7 +199,7 @@ body {
     background: var(--panel);
     border-bottom: 1px solid var(--border);
 
-    font-size: 13px;
+    font-size: 1.25rem;
     font-weight: 600;
     color: var(--muted);
 }
@@ -128,7 +216,7 @@ body {
         Monaco,
         monospace;
 
-    font-size: 14px;
+    font-size: 1rem;
     line-height: 1.5;
 
     white-space: pre-wrap;
@@ -159,7 +247,7 @@ body {
 
 .title {
     color: var(--muted);
-    font-size: 14px;
+    font-size: 1.25rem;
     margin-right: auto;
 }
 
@@ -177,7 +265,7 @@ body {
 }
 
 .loader {
-    margin-top: .5em;
+    margin-top: 0.5em;
     height: 1em;
     width: 1em;
     border: 6px solid white;

@@ -14,19 +14,36 @@
         Loading...
         <div class="loader"></div>
     </div>
-    <div class="toolbar">
-        <div class="title">
-            main.py
-        </div>
-        <button class="secondary btn" onclick="addText('\t')">
-            Tab
-            <i class="bi bi-chevron-bar-right"></i>
-        </button>
 
-        <button class="btn" onclick="runCode()">
-            Run
-            <i class="bi bi-play-fill"></i>
-        </button>
+    <div class="toolbar">
+
+        <div class="container">
+            <div class="title">
+                main.py
+            </div>
+
+            <div class="select-container">
+                <label for="f-size"><i class="bi bi-search"></i></label>
+                <select name="f-size" id="f-size" class="select">
+                    <option value="16px">100%</option>
+                    <option value="20px">125%</option>
+                    <option value="24px">150%</option>
+                    <option value="32px">200%</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="container">
+            <button class="secondary btn" onclick="addText('\t')">
+                Tab
+                <i class="bi bi-chevron-bar-right"></i>
+            </button>
+
+            <button class="btn" onclick="runCode()">
+                Run
+                <i class="bi bi-play-fill"></i>
+            </button>
+        </div>
     </div>
 
     <div class="workspace">
