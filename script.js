@@ -40,6 +40,19 @@ async function initPython() {
             output.textContent += text + "\n";
         }
     });
+
+    pyodide.globals.set("js_input", (promptText = "") => {
+        return window.prompt(promptText) ?? "";
+    });
+
+    await pyodide.runPythonAsync(`
+import builtins
+
+def browser_input(prompt=""):
+    return js_input(prompt)
+
+builtins.input = browser_input
+`);
 }
 
 async function runCode() {
