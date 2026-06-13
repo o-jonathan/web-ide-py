@@ -24,6 +24,7 @@ body {
     font-family: Inter, system-ui, sans-serif;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
 /* Top Bar */
@@ -229,16 +230,21 @@ option:hover {
 
     padding: 14px;
 
-    font-family:
-        Consolas,
-        Monaco,
-        monospace;
+    font-family: Consolas, Monaco, monospace;
 
     font-size: 1rem;
-    line-height: 1.5;
+    line-height: 1.25;
+    cursor: text;
 
     white-space: pre-wrap;
     word-break: break-word;
+
+    scroll-behavior: smooth;
+}
+
+.error {
+    color: #cc0000;
+    font-weight: bold;
 }
 
 /* Scrollbars */

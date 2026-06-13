@@ -36,6 +36,7 @@ async function initPython() {
     pyodide.setStdout({
         batched: (text) => {
             output.textContent += text + "\n";
+            output.className = 'success';
         }
     });
 
@@ -72,7 +73,10 @@ async function runCode() {
         }
     } catch (err) {
         output.textContent += err;
+        output.className = 'error';
     }
+
+    output.scrollTop = output.scrollHeight;
 }
 
 async function copyOutput() {
