@@ -11,7 +11,7 @@ require(["vs/editor/editor.main"], function () {
     window.editor = monaco.editor.create(
         document.getElementById("editor"),
         {
-            value: `print('Hello World!')`,
+            value: ``,
             language: "python",
             theme: "vs-dark",
             fontSize: localStorage.getItem("f-size") || "16px",
@@ -75,8 +75,12 @@ async function runCode() {
     }
 }
 
-async function copyCode() {
-    navigator.clipboard.writeText(output.textContent)
+async function copyOutput() {
+    try {
+        navigator.clipboard.writeText(output.textContent)
+    } catch (err) {
+        console.error(err)
+    }
 }
 
 function addText(text) {
@@ -110,5 +114,23 @@ document.getElementById("f-size").addEventListener("change", (event) => {
     editor.updateOptions({ fontSize: event.target.value });
     localStorage.setItem("f-size", event.target.value);
 })
+
+function download() {
+    const filename = document.getElementById('name').value || "main.py"
+    const text = editor.getValue()
+
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    if (confirm(`You are about to download ${filename} to your device.\nProceed?`)) {
+        element.click();
+    }
+
+    document.body.removeChild(element);
+}
 
 initPython();

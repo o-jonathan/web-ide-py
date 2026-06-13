@@ -43,10 +43,27 @@ body {
 }
 
 .container {
+    user-select: none;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 0.75rem;
+}
+
+#name {
+    user-select: text;
+    background-color: var(--panel);
+    border: none;
+    font-size: 1rem;
+    field-sizing: content;
+    max-width: 20rem;
+    color: var(--muted);
+}
+
+#name:focus, #name:hover {
+    color: white;
+    border: none;
+    outline: none;
 }
 
 .select-container {
@@ -247,6 +264,8 @@ option:hover {
 /* Optional Title */
 
 .title {
+    display: flex;
+    align-items: center;
     color: var(--muted);
     font-size: 1.25rem;
     margin-right: auto;
