@@ -176,3 +176,23 @@ function clearEditor() {
 }
 
 initPython();
+
+
+
+function updateHotbar() {
+    const hotbar = document.querySelector(".hotbar");
+
+    if (!window.visualViewport) return;
+
+    const keyboardHeight =
+        window.innerHeight -
+        window.visualViewport.height -
+        window.visualViewport.offsetTop;
+
+    hotbar.style.bottom = `${Math.max(0, keyboardHeight)}px`;
+}
+
+window.visualViewport?.addEventListener("resize", updateHotbar);
+window.visualViewport?.addEventListener("scroll", updateHotbar);
+
+updateHotbar();
