@@ -61,7 +61,8 @@ body {
     color: var(--muted);
 }
 
-#name:focus, #name:hover {
+#name:focus,
+#name:hover {
     color: white;
     border: none;
     outline: none;
@@ -110,10 +111,11 @@ body {
     transform: translateY(0);
 }
 
-select, ::picker(select) {
+select,
+::picker(select) {
     appearance: base-select;
     border: none;
-    border-radius: 8px ;
+    border-radius: 8px;
 }
 
 select::picker-icon {
@@ -200,7 +202,10 @@ option:hover {
 /* Console */
 
 .console {
+    position: absolute;
     height: 40dvh;
+    width: 100%;
+    bottom: 0;
 
     background: #181818;
     border-top: 1px solid var(--border);
@@ -308,6 +313,7 @@ option:hover {
     from {
         transform: rotateZ(0deg);
     }
+
     to {
         transform: rotateZ(360deg);
     }
@@ -317,7 +323,65 @@ option:hover {
     from {
         opacity: 1;
     }
+
     to {
         opacity: 0;
     }
+}
+
+.hotbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 4rem;
+    position: fixed;
+    background-color: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: 2rem;
+    padding: 1rem;
+    bottom: 41%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.dpad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .125rem;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: .125rem;
+}
+
+.sm-btn {
+    background-color: var(--accent);
+    color: white;
+
+    height: 2rem;
+    width: 2rem;
+    padding: .5rem;
+
+    border: none;
+    border-radius: .25rem;
+
+    font-size: 1rem;
+
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+.dpad button:active {
+    background-color: var(--accent-hover);
+    transform: scale(.95);
+}
+
+.hb-container {
+    display: flex;
+    flex-direction: column;
+    gap: .125rem;
 }

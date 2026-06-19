@@ -137,4 +137,42 @@ function download() {
     document.body.removeChild(element);
 }
 
+function moveCursor(direction) {
+    switch (direction) {
+        case "u":
+            editor.trigger("", "cursorUp", {});
+            break;
+        case "l":
+            editor.trigger("", "cursorLeft", {});
+            break;
+        case "r":
+            editor.trigger("", "cursorRight", {});
+            break;
+        case "d":
+            editor.trigger("", "cursorDown", {});
+            break;
+    }
+    editor.focus();
+}
+
+function moveSel(direction) {
+    switch (direction) {
+        case "l":
+            editor.trigger("", "cursorLeftSelect", {});
+            break;
+        case "r":
+            editor.trigger("", "cursorRightSelect", {});
+            break;
+    }
+    editor.focus();
+}
+
+function selAll() {
+    editor.trigger("", "editor.action.selectAll", {});
+}
+
+function clearEditor() {
+    editor.setValue("");
+}
+
 initPython();
