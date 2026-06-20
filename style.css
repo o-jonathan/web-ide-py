@@ -41,6 +41,7 @@ body {
     gap: 10px;
 
     padding: 0 16px;
+    overflow: hidden;
 }
 
 .container {
@@ -226,6 +227,7 @@ option:hover {
     font-size: 1.25rem;
     font-weight: 600;
     color: var(--muted);
+    overflow: hidden;
 }
 
 #output {
@@ -330,7 +332,7 @@ option:hover {
 }
 
 .hotbar {
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: space-evenly;
     gap: 4rem;

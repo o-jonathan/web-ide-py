@@ -21,6 +21,9 @@ require(["vs/editor/editor.main"], function () {
             }
         }
     );
+
+    editor.onDidFocusEditorText(updateHotbar);
+    editor.onDidBlurEditorText(updateHotbar);
     pgLoad()
 });
 
@@ -167,6 +170,20 @@ function moveSel(direction) {
     editor.focus();
 }
 
+let moveInterval;
+
+function startMove(dir) {
+    moveSel(dir);
+
+    moveInterval = setInterval(() => {
+        moveSel(dir);
+    }, 50);
+}
+
+function stopMove() {
+    clearInterval(moveInterval);
+}
+
 function selAll() {
     editor.trigger("", "editor.action.selectAll", {});
 }
@@ -182,14 +199,18 @@ initPython();
 function updateHotbar() {
     const hotbar = document.querySelector(".hotbar");
 
-    if (!window.visualViewport) return;
+    if (!window.visualViewport || !window.editor) return;
 
     const keyboardHeight =
         window.innerHeight -
         window.visualViewport.height -
         window.visualViewport.offsetTop;
 
-    hotbar.style.bottom = `${Math.max(0, keyboardHeight)}px`;
+    hotbar.style.bottom = `calc(${Math.max(0, keyboardHeight)}px + 0.125rem)`;
+
+    const editorFocused = editor.hasTextFocus();
+
+    hotbar.style.display = keyboardHeight > 0 || editorFocused ? "flex" : "none";
 }
 
 window.visualViewport?.addEventListener("resize", updateHotbar);
