@@ -30,6 +30,7 @@ require(["vs/editor/editor.main"], function () {
 
 
 let pyodide;
+let pythonReady = false;
 const output = document.getElementById("output");
 
 async function initPython() {
@@ -61,6 +62,9 @@ def browser_input(prompt=""):
 
 builtins.input = browser_input
 `);
+
+    pythonReady = true;
+    pgLoad()
 }
 
 async function runCode() {
@@ -106,14 +110,20 @@ function addText(text) {
     editor.focus();
 }
 
-function pgLoad() {
+async function pgLoad() {
     const loadscreen = document.getElementById("loading")
+    if (!loadscreen)
+        return
+
+    if (!window.editor || !pythonReady)
+        return
 
     loadscreen.addEventListener('animationend', () => {
         loadscreen.remove()
     })
 
     loadscreen.classList.add('fade')
+
 }
 
 document.getElementById("f-size").addEventListener("change", (event) => {
@@ -217,3 +227,22 @@ window.visualViewport?.addEventListener("resize", updateHotbar);
 window.visualViewport?.addEventListener("scroll", updateHotbar);
 
 updateHotbar();
+
+function validateFile(input) {
+    const file = input.files[0];
+
+    if (!file)
+        return
+
+    if (file.type === 'text/plain' || file.name.toLowerCase().endsWith('.py')) {
+        loadFile(file);
+    } else {
+        alert('Please select a .txt or a .py file.');
+        input.value = '';
+    }
+}
+
+async function loadFile(file) {
+    const content = await file.text();
+    editor.setValue(content);
+}

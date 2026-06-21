@@ -387,3 +387,7 @@ option:hover {
     flex-direction: column;
     gap: .125rem;
 }
+
+input[type="file"] {
+    display: none;
+}
