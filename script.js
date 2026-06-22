@@ -18,7 +18,9 @@ require(["vs/editor/editor.main"], function () {
             automaticLayout: true,
             minimap: {
                 enabled: false
-            }
+            },
+            insertSpaces: true,
+            tabSize: 4
         }
     );
 
@@ -71,7 +73,7 @@ async function runCode() {
     output.textContent = "";
 
     try {
-        const code = editor.getValue();
+        const code = editor.getValue().replace(/\t/g, "    ");
 
         const result = await pyodide.runPythonAsync(code);
 
@@ -180,19 +182,19 @@ function moveSel(direction) {
     editor.focus();
 }
 
-let moveInterval;
+// let moveInterval;
 
-function startMove(dir) {
-    moveSel(dir);
+// function startMove(dir) {
+//     moveSel(dir);
 
-    moveInterval = setInterval(() => {
-        moveSel(dir);
-    }, 50);
-}
+//     moveInterval = setInterval(() => {
+//         moveSel(dir);
+//     }, 50);
+// }
 
-function stopMove() {
-    clearInterval(moveInterval);
-}
+// function stopMove() {
+//     clearInterval(moveInterval);
+// }
 
 function selAll() {
     editor.trigger("", "editor.action.selectAll", {});
@@ -220,7 +222,7 @@ function updateHotbar() {
 
     const editorFocused = editor.hasTextFocus();
 
-    hotbar.style.display = keyboardHeight > 0 || editorFocused ? "flex" : "none";
+    hotbar.style.display = keyboardHeight > 0 ? "flex" : "none";
 }
 
 window.visualViewport?.addEventListener("resize", updateHotbar);
