@@ -153,6 +153,7 @@ function download() {
     }
 
     document.body.removeChild(element);
+    closeMenu();
 }
 
 function moveCursor(direction, ev) {
@@ -212,6 +213,7 @@ function selAll() {
 
 function clearEditor() {
     editor.setValue("");
+    closeMenu();
 }
 
 initPython();
@@ -260,4 +262,15 @@ function validateFile(input) {
 async function loadFile(file) {
     const content = await file.text();
     editor.setValue(content);
+    closeMenu();
+}
+
+const menu = document.getElementById('menu')
+
+function openMenu() {
+    menu.style.display = 'flex';
+}
+
+function closeMenu() {
+    menu.style.display = 'none';
 }
