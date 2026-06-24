@@ -7,6 +7,8 @@ require.config({
     }
 });
 
+let editorReady = false;
+
 require(["vs/editor/editor.main"], function () {
     window.editor = monaco.editor.create(
         document.getElementById("editor"),
@@ -24,9 +26,10 @@ require(["vs/editor/editor.main"], function () {
         }
     );
 
+    editorReady = true;
     editor.onDidFocusEditorText(updateHotbar);
     editor.onDidBlurEditorText(updateHotbar);
-    pgLoad()
+    pgLoad();
 });
 
 
@@ -152,7 +155,8 @@ function download() {
     document.body.removeChild(element);
 }
 
-function moveCursor(direction) {
+function moveCursor(direction, ev) {
+    ev.preventDefault();
     switch (direction) {
         case "u":
             editor.trigger("", "cursorUp", {});
@@ -170,7 +174,8 @@ function moveCursor(direction) {
     editor.focus();
 }
 
-function moveSel(direction) {
+function moveSel(direction, ev) {
+    ev.preventDefault();
     switch (direction) {
         case "l":
             editor.trigger("", "cursorLeftSelect", {});
@@ -182,19 +187,24 @@ function moveSel(direction) {
     editor.focus();
 }
 
-// let moveInterval;
+let moveInterval;
+let moveTimeout;
 
-// function startMove(dir) {
-//     moveSel(dir);
+function startMove(sel, dir) {
+    const ev = this.event;
+    sel ? moveSel(dir, ev) : moveCursor(dir, ev);
 
-//     moveInterval = setInterval(() => {
-//         moveSel(dir);
-//     }, 50);
-// }
+    moveTimeout = setTimeout(() => {
+        moveInterval = setInterval(() => {
+            sel ? moveSel(dir, ev) : moveCursor(dir, ev);
+        }, 40);
+    }, 300);
+}
 
-// function stopMove() {
-//     clearInterval(moveInterval);
-// }
+function stopMove() {
+    clearTimeout(moveTimeout);
+    clearInterval(moveInterval);
+}
 
 function selAll() {
     editor.trigger("", "editor.action.selectAll", {});
@@ -220,9 +230,12 @@ function updateHotbar() {
 
     hotbar.style.bottom = `calc(${Math.max(0, keyboardHeight)}px + 0.125rem)`;
 
-    const editorFocused = editor.hasTextFocus();
+    let editorFocused = false;
 
-    hotbar.style.display = keyboardHeight > 0 ? "flex" : "none";
+    if (editorReady)
+        editorFocused = editor.hasTextFocus();
+
+    //hotbar.style.display = keyboardHeight > 0 || editorFocused ? "flex" : "none";
 }
 
 window.visualViewport?.addEventListener("resize", updateHotbar);

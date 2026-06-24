@@ -86,26 +86,33 @@
                 <i class="bi bi-chevron-bar-right"></i>
             </button>
             <div class="row">
-                <button class="sm-btn" id="sel-l" onclick="moveSel('l')">
+                <button class="sm-btn" id="sel-l" onpointerdown="startMove(true, 'l')" onpointerup="stopMove()" onpointercancel="stopMove()">
                     <i class="bi bi-caret-left-square-fill"></i>
                 </button>
+
                 <button class="sm-btn" id="sel-r" onclick="selAll()"><i class="bi bi-square-fill"></i></button>
-                <button class="sm-btn" id="sel-r" onclick="moveSel('r')">
+
+                <button class="sm-btn" id="sel-r" onpointerdown="startMove(true, 'r')" onpointerup="stopMove()" onpointercancel="stopMove()">
                     <i class="bi bi-caret-right-square-fill"></i>
                 </button>
             </div>
         </div>
 
         <div class="dpad">
-            <button class="sm-btn" id="up" onclick="moveCursor('u')"><i class="bi bi-caret-up-fill"></i></button>
+            <button class="sm-btn" id="up" onpointerdown="startMove(false, 'u')" onpointerup="stopMove()" onpointercancel="stopMove()">
+                <i class="bi bi-caret-up-fill"></i>
+            </button>
 
             <div class="row">
-                <button class="sm-btn" id="left" onclick="moveCursor('l')"><i
-                        class="bi bi-caret-left-fill"></i></button>
-                <button class="sm-btn" id="down" onclick="moveCursor('d')"><i
-                        class="bi bi-caret-down-fill"></i></button>
-                <button class="sm-btn" id="right" onclick="moveCursor('r')"><i
-                        class="bi bi-caret-right-fill"></i></button>
+                <button class="sm-btn" id="left" onpointerdown="startMove(false, 'l')" onpointerup="stopMove()" onpointercancel="stopMove()">
+                    <i class="bi bi-caret-left-fill"></i>
+                </button>
+                <button class="sm-btn" id="down" onpointerdown="startMove(false, 'd')" onpointerup="stopMove()" onpointercancel="stopMove()">
+                    <i class="bi bi-caret-down-fill"></i>
+                </button>
+                <button class="sm-btn" id="right" onpointerdown="startMove(false, 'r')" onpointerup="stopMove()" onpointercancel="stopMove()">
+                    <i class="bi bi-caret-right-fill"></i>
+                </button>
             </div>
         </div>
     </div>
