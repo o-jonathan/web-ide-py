@@ -235,7 +235,7 @@ function updateHotbar() {
     if (editorReady)
         editorFocused = editor.hasTextFocus();
 
-    //hotbar.style.display = keyboardHeight > 0 || editorFocused ? "flex" : "none";
+    hotbar.style.display = keyboardHeight > 0 ? "flex" : "none";
 }
 
 window.visualViewport?.addEventListener("resize", updateHotbar);
