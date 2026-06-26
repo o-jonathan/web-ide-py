@@ -274,3 +274,44 @@ function openMenu() {
 function closeMenu() {
     menu.style.display = 'none';
 }
+
+function expandOutput() {
+    const bg = document.createElement("div");
+    const panel = document.createElement("div");
+    const topbar = document.createElement("div");
+    const title = document.createElement("span");
+    const container = document.createElement("div");
+    const close = document.createElement("button");
+    const copy = document.createElement("button");
+    const exOutput = document.createElement("pre");
+
+    bg.className = "exOutput-bg";
+    panel.className = "exOutput-panel";
+    topbar.className = "exOutput-topbar";
+    container.className = "exOutput-container";
+    close.classList.add("btn-err");
+    close.classList.add("btn");
+    copy.classList.add("secondary");
+    copy.classList.add("btn");
+    exOutput.classList = "output";
+
+    title.textContent = "OUTPUT";
+    close.innerHTML = `<i class="bi bi-x-lg"></i>`;
+    copy.innerHTML = `<i class="bi bi-clipboard-fill"></i>`;
+    exOutput.textContent = output.textContent;
+
+    close.onclick = () => {
+        bg.remove();
+    }
+
+    copy.onclick = copyOutput();
+
+    bg.appendChild(panel);
+    panel.appendChild(topbar);
+    topbar.appendChild(title);
+    topbar.appendChild(container);
+    container.appendChild(copy);
+    container.appendChild(close);
+    panel.appendChild(exOutput);
+    document.body.appendChild(bg);
+}

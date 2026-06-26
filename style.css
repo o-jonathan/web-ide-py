@@ -231,7 +231,7 @@ option:hover {
     overflow: hidden;
 }
 
-#output {
+#output, .output {
     flex: 1;
 
     overflow-y: auto;
@@ -264,15 +264,21 @@ option:hover {
 
 ::-webkit-scrollbar-track {
     background: #1a1a1a;
+    cursor: pointer;
 }
 
 ::-webkit-scrollbar-thumb {
     background: #555;
     border-radius: 999px;
+    cursor: grab;
 }
 
 ::-webkit-scrollbar-thumb:hover {
     background: #777;
+}
+
+::-webkit-scrollbar-thumb:active {
+    cursor: grabbing;
 }
 
 /* Optional Title */
@@ -457,5 +463,65 @@ input[type="file"] {
     }
     to {
         backdrop-filter: blur(4px);
+    }
+}
+
+.exOutput-bg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100dvw;
+    height: 100dvh;
+    background-color: rgba(0, 0, 0, 0.25);
+    animation: forwards blur-in 0.3s;
+}
+
+.exOutput-panel {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    width: 90dvw;
+    height: 90dvh;
+    padding: 1rem;
+    animation: forwards grow 0.3s;
+}
+
+.exOutput-topbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: calc(1rem - 1px);
+    padding-left: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.exOutput-topbar span {
+    font-size: 1.5rem;
+    font-weight: bolder;
+}
+
+.exOutput-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: fit-content;
+    gap: 1rem;
+}
+
+@keyframes grow {
+    from {
+        scale: 0;
+        opacity: 0;
+    }
+    to {
+        scale: 1;
+        opacity: 1;
     }
 }
