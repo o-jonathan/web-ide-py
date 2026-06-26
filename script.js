@@ -52,6 +52,7 @@ async function initPython() {
     pyodide.setStderr({
         batched: (text) => {
             output.textContent += text + "\n";
+            output.className = 'error';
         }
     });
 
@@ -82,6 +83,7 @@ async function runCode() {
 
         if (result !== undefined) {
             output.textContent += result;
+            output.className = 'success';
         }
     } catch (err) {
         output.textContent += err;
@@ -293,12 +295,13 @@ function expandOutput() {
     close.classList.add("btn");
     copy.classList.add("secondary");
     copy.classList.add("btn");
-    exOutput.classList = "output";
+    exOutput.classList.add("output");
 
     title.textContent = "OUTPUT";
     close.innerHTML = `<i class="bi bi-x-lg"></i>`;
     copy.innerHTML = `<i class="bi bi-clipboard-fill"></i>`;
     exOutput.textContent = output.textContent;
+    exOutput.classList.add(output.className);
 
     close.onclick = () => {
         bg.remove();
