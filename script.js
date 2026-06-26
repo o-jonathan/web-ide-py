@@ -29,6 +29,7 @@ require(["vs/editor/editor.main"], function () {
     editorReady = true;
     editor.onDidFocusEditorText(updateHotbar);
     editor.onDidBlurEditorText(updateHotbar);
+    editor.setValue(localStorage.getItem("last-code") || "");
     pgLoad();
 });
 
@@ -75,9 +76,10 @@ builtins.input = browser_input
 
 async function runCode() {
     output.textContent = "";
-
+    
     try {
         const code = editor.getValue().replace(/\t/g, "    ");
+        localStorage.setItem("last-code", code);
 
         const result = await pyodide.runPythonAsync(code);
 
